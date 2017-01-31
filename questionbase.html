@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html ng-app="eQuizApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="eQuiz.js"></script>
+</head>
+<body>
+<div id="ng-app" ng-controller="EQuizCtrl">
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">e-Quiz</span>
+        </div>
+        <div class="collapse navbar-collapse" id="topNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active"><a href="questionbase.html">BAZA PYTAŃ</a></li>
+                <li><a href="quiz1.html">QUIZ PRÓBNY</a></li>
+                <li><a href="quiz.html">QUIZ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8"><button id="button1" class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przewodyPolaczeniaLinie">Przewody, połączenia, linie</button></div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="przewodyPolaczeniaLinie" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:18:0">
+        <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#aparatyLacznikiUrzadzeniaStacyjne">Aparaty, łączniki, urządzenia stacyjne</button></div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="aparatyLacznikiUrzadzeniaStacyjne" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:29:18">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#zestyki">Zestyki</button></div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="zestyki" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:6:47">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#instalacjeSprzetInstalacyjny">Instalacje – sprzęt instalacyjny</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="instalacjeSprzetInstalacyjny" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:22:53">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#instalacjeSprzetOswietleniowy">Instalacje – sprzęt oświetleniowy</button></div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="instalacjeSprzetOswietleniowy" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:11:75">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#instalacjeOdbiorniki">Instalacje – odbiorniki</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="instalacjeOdbiorniki" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:9:86">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#elementyBierne">Elementy bierne</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="elementyBierne" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:8:95">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przyrzadyPolprzewodnikowe">Przyrządy półprzewodnikowe</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przyrzadyPolprzewodnikowe" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:7:103">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przyrzadySygnalizacyjneIPomiarowe">Przyrządy sygnalizacyjne i pomiarowe</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przyrzadySygnalizacyjneIPomiarowe" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:16:110">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uruchamianieNapedyAparatow">Uruchamianie – napędy aparatów</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uruchamianieNapedyAparatow" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:9:126">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uruchamianieNapedy">Uruchamianie – napędy</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uruchamianieNapedy" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:8:135">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przekaznikiPomiarowe">Przekaźniki pomiarowe</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przekaznikiPomiarowe" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:10:143">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przekaznikiPomiarowePrzyklady">Przekaźniki pomiarowe – przykłady</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przekaznikiPomiarowePrzyklady" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:5:153">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#wytwarzanieIPrzeksztalcanieEnergiiElektrycznej">Wytwarzanie i przekształcanie energii elektrycznej</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="wytwarzanieIPrzeksztalcanieEnergiiElektrycznej" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:28:158">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#wazniejszeSymboleRozrozniajace">Ważniejsze symbole rozróżniające</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="wazniejszeSymboleRozrozniajace" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:7:186">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#material">Materiał</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="material" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:4:193">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uzwojenia">Uzwojenia</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uzwojenia" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:9:197">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#funkcjaWejsciaIWyjsciaSygnalow">Funkcja wejścia i wyjścia sygnałów</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="funkcjaWejsciaIWyjsciaSygnalow" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:8:206">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8"><button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uproszczoneSymboleGraficzneLacznikowStosowaneWSchematachFunkcjonalnych">Uproszczone symbole graficzne łączników stosowane
+            w schematach funkcjonalnych</button></div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uproszczoneSymboleGraficzneLacznikowStosowaneWSchematachFunkcjonalnych" class="collapse">
+
+        <div ng-repeat = "i in eQuizData.norma | limitTo:6:214">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">{{$index+1}}) {{i.name}}</div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="footer">
+        <p>Copyright @2016 Michał Słyś </p>
+    </div>
+</div>
+</body>
+</html>
