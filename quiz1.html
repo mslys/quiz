@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html ng-app="eQuizApp">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="eQuiz.js"></script>
+</head>
+<body>
+
+<div ng-controller="EQuizCtrl">
+    <nav class="navbar navbar-default navbar-fixed-top">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand">e-Quiz</span>
+        </div>
+        <div class="collapse navbar-collapse" id="topNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="questionbase.html">BAZA PYTAŃ</a></li>
+                <li class="active"><a href="quiz1.html">QUIZ PRÓBNY</a></li>
+                <li><a href="quiz.html">QUIZ</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#przewodyPolaczeniaLinie" ng-click="randomizeArr1(17,0,1)">Przewody, połączenia, linie
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+
+    <div id="przewodyPolaczeniaLinie" class="collapse">
+        <div ng-repeat = "(iIndex, i) in eQuizData.norma | limitTo:18:0">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer" >
+                            <p>
+                                <button ng-class="{'correct': arrStyles[0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[0 + iIndex*4] == 'default'}" ng-disabled ="arrDisabled[iIndex]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex, 0)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[0 + iIndex*4]}:true">{{j.name}}
+                            </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[1 + iIndex*4] == 'default'}" ng-disabled ="arrDisabled[iIndex]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex, 0)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex]" ng-click="checkAns(2 + iIndex*4, iIndex, 0)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[3 + iIndex*4] == 'default'}" ng-disabled ="arrDisabled[iIndex]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex, 0)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#aparatyLacznikiUrzadzeniaStacyjne"
+                    ng-click="randomizeArr1(46,17,2)">Aparaty, łączniki, urządzenia stacyjne
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="aparatyLacznikiUrzadzeniaStacyjne" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:29:18">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[72 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[72 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[72 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 18]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 18, 72)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[72 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[72 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[72 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[72 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 18]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 18, 72)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[72 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[72 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[72 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[72 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 18]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 18, 72)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[72 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[72 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[72 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[72 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 18]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 18, 72)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[72 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#zestyki"
+                    ng-click="randomizeArr1(52,46,3)">Zestyki
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="zestyki" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:6:47">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[188 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[188 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[188 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 47]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 47, 188)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[188 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[188 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[188 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[188 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 47]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 47, 188)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[188 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[188 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[188 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[188 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 47]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 47, 188)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[188 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[188 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[188 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[188 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 47]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 47, 188)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[188 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8">
+        <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                data-target="#instalacjeSprzetInstalacyjny" ng-click="randomizeArr1(74,52,4)">
+            Instalacje – sprzęt instalacyjny
+        </button>
+    </div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="instalacjeSprzetInstalacyjny" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:22:53">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[212 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[212 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[212 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 53]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 53, 212)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[212 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[212 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[212 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[212 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 53]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 53, 212)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[212 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[212 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[212 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[212 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 53]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 53, 212)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[212 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[212 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[212 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[212 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 53]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 53, 212)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[212 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                                      data-target="#instalacjeSprzetOswietleniowy" ng-click="randomizeArr1(85,74,5)">
+                Instalacje – sprzęt oświetleniowy
+            </button>
+        </div>
+    <div class="col-sm-2"> </div>
+    </div>
+    <div id="instalacjeSprzetOswietleniowy" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:11:75">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[300 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[300 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[300 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 75]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 75, 300)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[300 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[300 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[300 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[300 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 75]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 75, 300)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[300 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[300 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[300 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[300 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 75]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 75, 300)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[300 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[300 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[300 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[300 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 75]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 75, 300)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[300 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8">
+        <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#instalacjeOdbiorniki"
+                ng-click="randomizeArr1(94,85,6)">
+            Instalacje – odbiorniki
+        </button>
+    </div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="instalacjeOdbiorniki" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:9:86">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[344 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[344 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[344 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 86]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 86, 344)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[344 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[344 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[344 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[344 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 86]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 86, 344)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[344 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[344 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[344 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[344 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 86]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 86, 344)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[344 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[344 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[344 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[344 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 86]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 86, 344)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[344 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#elementyBierne"
+                    ng-click="randomizeArr1(102,94,7)">Elementy bierne
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="elementyBierne" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:8:95">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[380 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[380 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[380 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 95]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 95, 380)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[380 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[380 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[380 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[380 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 95]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 95, 380)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[380 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[380 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[380 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[380 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 95]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 95, 380)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[380 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[380 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[380 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[380 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 95]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 95, 380)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[380 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#przyrzadyPolprzewodnikowe" ng-click="randomizeArr1(109,102,8)">
+                Przyrządy półprzewodnikowe
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przyrzadyPolprzewodnikowe" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:7:103">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[412 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[412 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[412 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 103]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 103, 412)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[412 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[412 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[412 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[412 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 103]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 103, 412)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[412 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[412 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[412 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[412 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 103]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 103, 412)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[412 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[412 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[412 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[412 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 103]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 103, 412)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[412 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#przyrzadySygnalizacyjneIPomiarowe" ng-click="randomizeArr1(125,109,9)">
+                Przyrządy sygnalizacyjne i pomiarowe
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przyrzadySygnalizacyjneIPomiarowe" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:16:110">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[440 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[440 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[440 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 110]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 110, 440)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[440 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[440 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[440 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[440 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 110]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 110, 440)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[440 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[440 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[440 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[440 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 110]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 110, 440)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[440 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[440 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[440 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[440 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 110]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 110, 440)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[440 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#uruchamianieNapedyAparatow" ng-click="randomizeArr1(134,125,10)">
+                Uruchamianie – napędy aparatów
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uruchamianieNapedyAparatow" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:9:126">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[504 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[504 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[504 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 126]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 126, 504)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[504 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[504 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[504 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[504 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 126]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 126, 504)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[504 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[504 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[504 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[504 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 126]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 126, 504)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[504 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[504 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[504 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[504 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 126]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 126, 504)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[504 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uruchamianieNapedy"
+                    ng-click="randomizeArr1(142,134,11)">Uruchamianie – napędy
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uruchamianieNapedy" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:8:135">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[540 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[540 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[540 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 135]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 135, 540)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[540 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[540 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[540 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[540 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 135]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 135, 540)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[540 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[540 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[540 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[540 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 135]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 135, 540)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[540 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[540 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[540 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[540 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 135]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 135, 540)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[540 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#przekaznikiPomiarowe"
+                    ng-click="randomizeArr1(152,142,12)">Przekaźniki pomiarowe
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przekaznikiPomiarowe" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:10:143">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[572 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[572 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[572 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 143]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 143, 572)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[572 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[572 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[572 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[572 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 143]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 143, 572)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[572 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[572 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[572 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[572 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 143]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 143, 572)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[572 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[572 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[572 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[572 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 143]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 143, 572)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[572 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#przekaznikiPomiarowePrzyklady" ng-click="randomizeArr1(157,152,13)">
+                Przekaźniki pomiarowe – przykłady
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="przekaznikiPomiarowePrzyklady" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:5:153">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[612 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[612 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[612 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 153]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 153, 612)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[612 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[612 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[612 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[612 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 153]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 153, 612)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[612 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[612 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[612 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[612 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 153]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 153, 612)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[612 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[612 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[612 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[612 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 153]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 153, 612)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[612 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#wytwarzanieIPrzeksztalcanieEnergiiElektrycznej"
+                    ng-click="randomizeArr1(185,157,14)">Wytwarzanie i przekształcanie energii elektrycznej
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="wytwarzanieIPrzeksztalcanieEnergiiElektrycznej" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:28:158">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[632 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[632 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[632 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 158]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 158, 632)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[632 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[632 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[632 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[632 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 158]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 158, 632)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[632 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[632 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[632 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[613 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 158]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 158, 632)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[632 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[632 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[632 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[632 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 158]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 158, 632)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[632 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8">
+        <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                data-target="#wazniejszeSymboleRozrozniajace" ng-click="randomizeArr1(192,185,15)">
+            Ważniejsze symbole rozróżniające
+        </button>
+    </div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="wazniejszeSymboleRozrozniajace" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:7:186">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[744 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[744 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[744 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 186]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 186, 744)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[744 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[744 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[744 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[744 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 186]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 186, 744)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[744 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[744 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[744 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[744 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 186]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 186, 744)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[744 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[744 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[744 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[744 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 186]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 186, 744)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[744 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#material"
+                    ng-click="randomizeArr1(196,192,16)">Materiał
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="material" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:4:193">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[772 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[772 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[772 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 193]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 193, 772)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[772 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[772 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[772 + 1 + iIndex*4] == 'incorrect',
+                                 'default': arrStyles[772 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 193]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 193, 772)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[772 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[772 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[772 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[772 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 193]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 193, 772)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[772 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[772 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[772 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[772 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 193]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 193, 772)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[772 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-8">
+        <button class="btn btn-primary btn-md btn-block" data-toggle="collapse" data-target="#uzwojenia"
+                ng-click="randomizeArr1(205,196,17)">Uzwojenia
+        </button>
+    </div>
+    <div class="col-sm-2"> </div>
+</div>
+    <div id="uzwojenia" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:9:197">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[788 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[788 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[788 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 197]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 197, 788)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[788 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[788 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[788 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[788 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 197]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 197, 788)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[788 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[788 + 2 + iIndex*4] == 'correct',
+                                 'incorrect': arrStyles[788 + 2 + iIndex*4] == 'incorrect',
+                                 'default': arrStyles[788 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 197]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 197, 788)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[788 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[788 + 3 + iIndex*4] == 'correct',
+                                 'incorrect': arrStyles[788 + 3 + iIndex*4] == 'incorrect',
+                                 'default': arrStyles[788 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 197]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 197, 788)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[788 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#funkcjaWejsciaIWyjsciaSygnalow" ng-click="randomizeArr1(213,205,18)">
+                Funkcja wejścia i wyjścia sygnałów
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="funkcjaWejsciaIWyjsciaSygnalow" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:8:206">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[824 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[824 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[824 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 206]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 206, 824)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[824 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[824 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[824 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[824 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 206]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 206, 824)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[824 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[824 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[824 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[824 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 206]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 206, 824)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[824 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[824 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[824 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[824 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 206]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 206, 824)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[824 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+            <button class="btn btn-primary btn-md btn-block" data-toggle="collapse"
+                    data-target="#uproszczoneSymboleGraficzneLacznikowStosowaneWSchematachFunkcjonalnych"
+                    ng-click="randomizeArr1(219,213,19)">
+                Uproszczone symbole graficzne łączników stosowane w schematach funkcjonalnych
+            </button>
+        </div>
+        <div class="col-sm-2"> </div>
+    </div>
+    <div id="uproszczoneSymboleGraficzneLacznikowStosowaneWSchematachFunkcjonalnych" class="collapse">
+
+        <div ng-repeat = "(iIndex, i)  in eQuizData.norma | limitTo:6:214">
+            <div class="row">
+                <div class="col-sm-2"> </div>
+                <div class="col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body"><img ng-src="{{i.url}}"></div>
+                        <div class="panel-footer">
+                            <p>
+                                <button ng-class="{'correct': arrStyles[856 + 0 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[856 + 0 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[856 + 0 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 214]"
+                                        ng-click="checkAns(0 + iIndex*4, iIndex + 214, 856)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[856 + 0 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[856 + 1 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[856 + 1 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[856 + 1 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 214]"
+                                        ng-click="checkAns(1 + iIndex*4, iIndex + 214, 856)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[856 + 1 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[856 + 2 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[856 + 2 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[856 + 2 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 214]"
+                                        ng-click="checkAns(2 + iIndex*4, iIndex + 214, 856)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[856 + 2 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                            <p>
+                                <button ng-class="{'correct': arrStyles[856 + 3 + iIndex*4] == 'correct',
+                                'incorrect': arrStyles[856 + 3 + iIndex*4] == 'incorrect',
+                                'default': arrStyles[856 + 3 + iIndex*4] == 'default'}"
+                                        ng-disabled ="arrDisabled[iIndex + 214]"
+                                        ng-click="checkAns(3 + iIndex*4, iIndex + 214, 856)"
+                                        ng-repeat = "j in eQuizData.norma|filter:{id: arr[856 + 3 + iIndex*4]}:true">{{j.name}}
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2"> </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="footer">
+        <p>Copyright @2016 Michał Słyś </p>
+    </div>
+</div>
+</body>
+</html>
